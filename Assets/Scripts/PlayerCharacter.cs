@@ -7,7 +7,9 @@ public class PlayerCharacter : MonoBehaviour {
     [SerializeField]
     private Rigidbody2D rb2d;
     [SerializeField]
-    private float speed = 5;
+    private float acceleration = 5;
+    [SerializeField]
+    private float maxSpeed = 5;
     private float horzInput;
     
 
@@ -28,6 +30,12 @@ public class PlayerCharacter : MonoBehaviour {
     //physics calls should be here so performance is optimized
     void FixedUpdate()
     {
-        rb2d.AddForce(Vector2.right * horzInput * speed);
+        rb2d.AddForce(Vector2.right * horzInput * acceleration);
+        //set clmap for velocity
+        Vector2 clampedVelocity = rb2d.velocity;
+        //clamp the max speed on the x axis
+        clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
+        rb2d.velocity = clampedVelocity;
+
     }
 }
