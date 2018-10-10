@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 582298295}
-  acceleration: 40
+  acceleration: 20
   maxSpeed: 5
   jumpForce: 10
   groundContactFilter:
@@ -299,6 +299,9 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   groundDetectTrig: {fileID: 582298297}
+  playerGroundCollider: {fileID: 582298296}
+  playerMovePhys: {fileID: 6200000, guid: 74eca7db134ee40469305d34d7ef61b5, type: 2}
+  playerStopPhys: {fileID: 6200000, guid: 5fe81353fdbdd6048ae072bd2349acb3, type: 2}
 --- !u!50 &582298295
 Rigidbody2D:
   serializedVersion: 4
@@ -327,7 +330,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 582298291}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5fe81353fdbdd6048ae072bd2349acb3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -454,8 +457,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1009163904}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.686, y: -4.53, z: 0}
-  m_LocalScale: {x: 5.310052, y: 0.93736064, z: 1}
+  m_LocalPosition: {x: -6.854, y: -4.5, z: 0}
+  m_LocalScale: {x: 7.70325, y: 0.93736064, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -555,7 +558,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1973588817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.99, y: -4.53, z: 0}
+  m_LocalPosition: {x: 7.13, y: -4.5, z: 0}
   m_LocalScale: {x: 6.7065964, y: 0.93736064, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -656,7 +659,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1991995755}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.709, y: -4.53, z: 0}
+  m_LocalPosition: {x: 0.37, y: -4.5, z: 0}
   m_LocalScale: {x: 6.7065964, y: 0.93736064, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

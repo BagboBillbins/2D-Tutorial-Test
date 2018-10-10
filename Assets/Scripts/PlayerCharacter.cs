@@ -16,6 +16,10 @@ public class PlayerCharacter : MonoBehaviour {
     private ContactFilter2D groundContactFilter;
     [SerializeField]
     private Collider2D groundDetectTrig;
+    [SerializeField]
+    private Collider2D playerGroundCollider;
+    [SerializeField]
+    private PhysicsMaterial2D playerMovePhys, playerStopPhys;
 
     private float horzInput;
     private bool onGround;
@@ -26,7 +30,7 @@ public class PlayerCharacter : MonoBehaviour {
     {
 		
 	}
-	
+
 	// Update is called once per frame
     //Leave input to call as fast as possible
 	void Update()
@@ -36,19 +40,36 @@ public class PlayerCharacter : MonoBehaviour {
         JumpInputHandler();
 
     }
+    
+    //physics calls should be here so performance is optimized
+    void FixedUpdate()
+    {
+        UpdatePhysMat();
+        Move();
 
+    }
+
+    private void UpdatePhysMat()
+    {
+        if(Mathf.Abs(horzInput)>0)
+        {
+            playerGroundCollider.sharedMaterial = playerMovePhys;
+        }
+        else
+        {
+            playerGroundCollider.sharedMaterial = playerStopPhys;
+        }
+    }
     private void UpdateOnGround()
     {
         onGround = groundDetectTrig.OverlapCollider(groundContactFilter, groundHitDetector) > 0;
         //Debug.Log("Grounded: " + onGround);
 
     }
-
     private void UpdateHorzInput()
     {
-        horzInput = Input.GetAxis("Horizontal");
+        horzInput = Input.GetAxisRaw("Horizontal"); //raw ignores unity's smoothing filter which makes movement more responsive
     }
-
     private void JumpInputHandler()
     {
         if (Input.GetButtonDown("Jump") && onGround)
@@ -56,14 +77,6 @@ public class PlayerCharacter : MonoBehaviour {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);//Impulse adds immediate action while force is not
         }
     }
-
-    //physics calls should be here so performance is optimized
-    void FixedUpdate()
-    {
-        Move();
-
-    }
-
     private void Move()
     {
         rb2d.AddForce(Vector2.right * horzInput * acceleration);
