@@ -26,7 +26,7 @@ public class PlayerCharacter : MonoBehaviour
     private float horzInput;
     private bool onGround;
     private Collider2D[] groundHitDetector = new Collider2D[16];
-    private Checkpoint currentCheckpoint;
+    private Checkpoint currentCheck;
 
 	// Use this for initialization
 	void Start ()
@@ -88,19 +88,25 @@ public class PlayerCharacter : MonoBehaviour
     }
     public void Respawn()
     {
-        if(currentCheckpoint = null)
+        if(currentCheck == null)
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);//reload current scene on death
 
         else
         {
             rb2d.velocity = Vector2.zero;
-            transform.position = currentCheckpoint.transform.position;
+            transform.position = currentCheck.transform.position;
         }
         
     }
     public void setCurrentCheck(Checkpoint newCurrentCheck)
     {
-        currentCheckpoint = newCurrentCheck;
+        if(currentCheck !=null)
+        {
+            currentCheck.setActive(false);
+            currentCheck = newCurrentCheck;
+            currentCheck.setActive(true);
+
+        }
     }
     
 }

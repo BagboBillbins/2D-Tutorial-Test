@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Hazard : MonoBehaviour
 {
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,9 +17,8 @@ public class Hazard : MonoBehaviour
             
         }
         else
-        {
             Debug.Log("Something has hit a hazard");
-        }
+        
         
     }
 
