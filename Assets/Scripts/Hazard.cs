@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class Hazard : MonoBehaviour
 {
     
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
+      
     {
         if(collision.gameObject.CompareTag("Player"))
         {
@@ -24,5 +25,6 @@ public class Hazard : MonoBehaviour
 
     //hard collision so you don't check the trigger in the collider
     //private void OnCollisionEnter2D(Collision2D collision)
+    
     
 }

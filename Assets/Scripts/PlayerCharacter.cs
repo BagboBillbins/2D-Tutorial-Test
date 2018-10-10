@@ -33,7 +33,6 @@ public class PlayerCharacter : MonoBehaviour
     {
 		
 	}
-
 	// Update is called once per frame
     //Leave input to call as fast as possible
 	void Update()
@@ -43,7 +42,6 @@ public class PlayerCharacter : MonoBehaviour
         JumpInputHandler();
 
     }
-    
     //physics calls should be here so performance is optimized
     void FixedUpdate()
     {
@@ -51,6 +49,7 @@ public class PlayerCharacter : MonoBehaviour
         Move();
 
     }
+
 
     private void UpdatePhysMat()
     {
@@ -98,15 +97,14 @@ public class PlayerCharacter : MonoBehaviour
         }
         
     }
-    public void setCurrentCheck(Checkpoint newCurrentCheck)
+    public void SetCurrentCheck(Checkpoint newCurrentCheck)
     {
         if(currentCheck !=null)
-        {
-            currentCheck.setActive(false);
-            currentCheck = newCurrentCheck;
-            currentCheck.setActive(true);
+         currentCheck.setActive(false);
 
-        }
+        currentCheck = newCurrentCheck;
+        currentCheck.setActive(true);
+
     }
     
 }

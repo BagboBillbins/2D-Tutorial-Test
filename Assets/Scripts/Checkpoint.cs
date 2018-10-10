@@ -7,11 +7,40 @@ public class Checkpoint : MonoBehaviour
 {
     [SerializeField]
     private float inactiveRotateSpeed = 100, activeRotateSpeed = 300;
-    private bool isActive = false;
+    [SerializeField]
+    private float inactiveScale = 1, activeScale = 1.5f;
+    [SerializeField]
 
+    private Color inactiveColor, activeColor;
+    private bool isActive = false;
+    private SpriteRenderer spriteRenderer;
+
+    //use for initialization
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        UpdateColor();
+    }
     private void Update()
     {
         UpdateRotate();
+    }
+
+
+    private void UpdateColor()
+    {
+        Color color = inactiveColor;
+        if (isActive)
+            color = activeColor;
+        spriteRenderer.color = color;
+        
+    }
+    private void UpdateScale()
+    {
+        float scale = inactiveScale;
+        if (isActive)
+            scale = activeScale;
+        transform.localScale = Vector3.one * scale;
     }
     private void UpdateRotate()
     {
@@ -24,6 +53,9 @@ public class Checkpoint : MonoBehaviour
     public void setActive(bool value)
     {
         isActive = value;
+        UpdateScale();
+        UpdateColor();
+        //scale and color changed here instead of in Update since this only needs to hapen once and not every frame
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,7 +64,7 @@ public class Checkpoint : MonoBehaviour
         {
             Debug.Log("Player entered checkpoint");
             PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
-            player.setCurrentCheck(this);
+            player.SetCurrentCheck(this);
         }
 
     }
