@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCharacter : MonoBehaviour
 {
@@ -54,30 +55,29 @@ public class PlayerCharacter : MonoBehaviour
     private void UpdatePhysMat()
     {
         if(Mathf.Abs(horzInput)>0)
-        {
             playerGroundCollider.sharedMaterial = playerMovePhys;
-        }
+        
         else
-        {
             playerGroundCollider.sharedMaterial = playerStopPhys;
-        }
     }
+
     private void UpdateOnGround()
     {
         onGround = groundDetectTrig.OverlapCollider(groundContactFilter, groundHitDetector) > 0;
         //Debug.Log("Grounded: " + onGround);
 
     }
+
     private void UpdateHorzInput()
     {
         horzInput = Input.GetAxisRaw("Horizontal"); //raw ignores unity's smoothing filter which makes movement more responsive
     }
+
     private void JumpInputHandler()
     {
         if (Input.GetButtonDown("Jump") && onGround)
-        {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);//Impulse adds immediate action while force is not
-        }
+        
     }
     private void Move()
     {
@@ -86,8 +86,21 @@ public class PlayerCharacter : MonoBehaviour
         clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);//clamp the max speed on the x axis
         rb2d.velocity = clampedVelocity;
     }
-    private void setCurrentCheck(Checkpoint newCurrentCheck)
+    public void Respawn()
+    {
+        if(currentCheckpoint = null)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);//reload current scene on death
+
+        else
+        {
+            rb2d.velocity = Vector2.zero;
+            transform.position = currentCheckpoint.transform.position;
+        }
+        
+    }
+    public void setCurrentCheck(Checkpoint newCurrentCheck)
     {
         currentCheckpoint = newCurrentCheck;
     }
+    
 }

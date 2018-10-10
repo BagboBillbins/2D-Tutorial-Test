@@ -11,7 +11,9 @@ public class Hazard : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player entered hazard");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);//reload current scene on death
+            PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
+            player.Respawn(); //respawn player at checkpoint
+            
         }
         else
         {

@@ -11,6 +11,7 @@ public class Checkpoint : MonoBehaviour
         {
             Debug.Log("Player entered checkpoint");
             PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
+            player.setCurrentCheck(this);
         }
 
     }
