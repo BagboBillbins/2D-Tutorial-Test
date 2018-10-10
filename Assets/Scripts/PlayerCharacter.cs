@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCharacter : MonoBehaviour {
+public class PlayerCharacter : MonoBehaviour
+{
 
     [SerializeField]
     private Rigidbody2D rb2d;
@@ -24,6 +25,7 @@ public class PlayerCharacter : MonoBehaviour {
     private float horzInput;
     private bool onGround;
     private Collider2D[] groundHitDetector = new Collider2D[16];
+    private Checkpoint currentCheckpoint;
 
 	// Use this for initialization
 	void Start ()
@@ -83,5 +85,9 @@ public class PlayerCharacter : MonoBehaviour {
         Vector2 clampedVelocity = rb2d.velocity;//set clamp for velocity
         clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);//clamp the max speed on the x axis
         rb2d.velocity = clampedVelocity;
+    }
+    private void setCurrentCheck(Checkpoint newCurrentCheck)
+    {
+        currentCheckpoint = newCurrentCheck;
     }
 }
