@@ -14,11 +14,13 @@ public class Checkpoint : MonoBehaviour
     private Color inactiveColor, activeColor;
     private bool isActive = false;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioScource;
 
     //use for initialization
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioScource = GetComponent<AudioSource>();
         UpdateColor();
     }
     private void Update()
@@ -60,11 +62,12 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isActive)
         {
             Debug.Log("Player entered checkpoint");
             PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
             player.SetCurrentCheck(this);
+            audioScource.Play();
         }
 
     }
